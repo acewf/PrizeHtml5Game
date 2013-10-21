@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<!-- saved from url=(0042)http://thewebrocks.com/demos/html5catcher/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
-  <title>HTML5 Catcher</title>
-  <meta type="description" content="HTML5 catcher is a simple game to catch falling elements. You can use the keyboard, move the mouse or tilt your phone or tablet to move left and right">
+  <title>Prize</title>
+  <meta type="description" content="Prize sonae sierra">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> 
-  <link href="./HTML5 Catcher_files/css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="./HTML5 Catcher_files/playingfield.css" type="text/css">
-  <link rel="stylesheet" href="./HTML5 Catcher_files/textstyles.css" type="text/css">
+  <link href="./prize/css" rel="stylesheet" type="text/css">
+  <!-- <link rel="stylesheet" href="./prize/playingfield.css" type="text/css"> -->
+  <link rel="stylesheet" href="./prize/textstyles.css" type="text/css">
+  <link rel="stylesheet" href="./prize/prize.css" type="text/css">
 </head>
 <body>
   <header><h1></h1></header>
   <div id="container" tabindex="-1">
+
+  <!--  <img src="img/background/laranja.svg" class="svgelement">-->
 
   <section id="intro" class="current">
       <h1><span>HTML5 </span>Catcher</h1>
@@ -29,7 +31,7 @@
     <ul id="characters" data-countstart="2" data-newsprite="500">
       <li class="introdeck">
         <h2>You are HTML5:</h2>
-        <img src="./HTML5 Catcher_files/shield.png" width="72" height="100" id="player" data-increase="5">
+        <img src="./prize/shield.png" width="72" height="100" id="player" data-increase="5">
         <p>Your job is to catch as many of your components as you can.</p>
         <p>You can use the cursor keys or move the mouse on the playfield <span id="orientation">- or simply tilt your mobile or tablet</span>.</p>
         <p>Failing to catch your components or catching wrong ones costs energy. The game is over when you are out of energy.</p>
@@ -40,15 +42,15 @@
         <h2>The great components</h2>
         <p>Each are worth 20 energy points that you can win or lose.</p>
         <ul>
-          <li><img src="./HTML5 Catcher_files/video.png" class="sprite" alt="Video" data-collision="energy:20" data-type="good"></li>
-          <li><img src="./HTML5 Catcher_files/audio.png" class="sprite" alt="Audio" data-collision="energy:20" data-type="good"></li>
-          <li><img src="./HTML5 Catcher_files/canvas.png" class="sprite" alt="Canvas" data-collision="energy:20" data-type="good"></li>
+          <li><img src="./prize/video.png" class="sprite" alt="Video" data-collision="energy:20" data-type="good"></li>
+          <li><img src="./prize/audio.png" class="sprite" alt="Audio" data-collision="energy:20" data-type="good"></li>
+          <li><img src="./prize/canvas.png" class="sprite" alt="Canvas" data-collision="energy:20" data-type="good"></li>
         </ul>
         <h2>The good components</h2>
         <p>Each are worth 10 energy points that you can win or lose.</p>
         <ul>
-          <li><img src="./HTML5 Catcher_files/semanticmarkup.png" class="sprite" alt="Semantic Markup" data-collision="energy:10" data-type="good"></li>
-          <li><img src="./HTML5 Catcher_files/history.png" class="sprite" alt="History" data-collision="energy:10" data-type="good"></li>
+          <li><img src="./prize/semanticmarkup.png" class="sprite" alt="Semantic Markup" data-collision="energy:10" data-type="good"></li>
+          <li><img src="./prize/history.png" class="sprite" alt="History" data-collision="energy:10" data-type="good"></li>
         </ul>
         <p><button class="next">More</button></p>
       </li>
@@ -57,15 +59,15 @@
         <h2>The lesser known components</h2>
         <p>These are also your components. Each are worth 5 energy points that you can win or lose.</p>
         <ul>
-          <li><img src="./HTML5 Catcher_files/draganddrop.png" class="sprite" alt="Drag and Drop" data-collision="energy:5" data-type="good"></li>
-          <li><img src="./HTML5 Catcher_files/menu.png" class="sprite" alt="Menus" data-collision="energy:5" data-type="good"></li>
+          <li><img src="./prize/draganddrop.png" class="sprite" alt="Drag and Drop" data-collision="energy:5" data-type="good"></li>
+          <li><img src="./prize/menu.png" class="sprite" alt="Menus" data-collision="energy:5" data-type="good"></li>
         </ul>
         <h2>Not your components</h2>
         <p>These are really not what you are. Catching each will cost you 20 energy points.</p>
         <ul>
-          <li><img src="./HTML5 Catcher_files/flash.png" class="sprite" alt="Flash" data-collision="energy:-20" data-type="bad"></li>
-          <li><img src="./HTML5 Catcher_files/jquery.png" class="sprite" alt="jQuery" data-collision="energy:-20" data-type="bad"></li>
-          <li><img src="./HTML5 Catcher_files/css.png" class="sprite" alt="CSS" data-collision="energy:-20" data-type="bad"></li>
+          <li><img src="./prize/flash.png" class="sprite" alt="Flash" data-collision="energy:-20" data-type="bad"></li>
+          <li><img src="./prize/jquery.png" class="sprite" alt="jQuery" data-collision="energy:-20" data-type="bad"></li>
+          <li><img src="./prize/css.png" class="sprite" alt="CSS" data-collision="energy:-20" data-type="bad"></li>
         </ul>
         <p><button class="next">More</button></p>
       </li>
@@ -74,11 +76,11 @@
         <h2>Related, but not you</h2>
         <p>These are not yours either. Catching each will cost you 10 energy points.</p>
         <ul>
-          <li><img src="./HTML5 Catcher_files/webgl.png" class="sprite" alt="WebGL" data-collision="energy:-10" data-type="bad"></li>
-          <li><img src="./HTML5 Catcher_files/mediaqueries.png" class="sprite" alt="Media queries" data-collision="energy:-10" data-type="bad"></li>
-          <li><img src="./HTML5 Catcher_files/fileapi.png" class="sprite" alt="File API" data-collision="energy:-10" data-type="bad"></li>
-          <li><img src="./HTML5 Catcher_files/svg.png" class="sprite" alt="SVG" data-collision="energy:-10" data-type="bad"></li>
-          <li><img src="./HTML5 Catcher_files/geolocation.png" class="sprite" alt="Geolocation" data-collision="energy:-10" data-type="bad"></li>
+          <li><img src="./prize/webgl.png" class="sprite" alt="WebGL" data-collision="energy:-10" data-type="bad"></li>
+          <li><img src="./prize/mediaqueries.png" class="sprite" alt="Media queries" data-collision="energy:-10" data-type="bad"></li>
+          <li><img src="./prize/fileapi.png" class="sprite" alt="File API" data-collision="energy:-10" data-type="bad"></li>
+          <li><img src="./prize/svg.png" class="sprite" alt="SVG" data-collision="energy:-10" data-type="bad"></li>
+          <li><img src="./prize/geolocation.png" class="sprite" alt="Geolocation" data-collision="energy:-10" data-type="bad"></li>
         </ul>
         <p><button class="endinstructions">Back to menu</button></p>
       </li>
@@ -108,6 +110,6 @@
 </div>
 <footer>
 </footer>
-<script src="./HTML5 Catcher_files/game.js"></script>
+<script src="./prize/game.js"></script>
 
 </body></html>

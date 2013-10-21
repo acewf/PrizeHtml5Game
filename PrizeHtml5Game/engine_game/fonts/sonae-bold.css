@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'SonaeBold';
+    src: url('sonae-bold.eot');
+    src: url('sonae-bold.eot') format('embedded-opentype'),
+         url('sonae-bold.woff') format('woff'),
+         url('sonae-bold.ttf') format('truetype'),
+         url('sonae-bold.svg#SonaeBold') format('svg');
+}
