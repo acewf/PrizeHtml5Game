@@ -1,6 +1,4 @@
 body {
-  font-size: 20px;
-  font-family: "Patua One", calibri, arial, sans-serif;
   background: #000;
 }
 #characters{
@@ -9,6 +7,7 @@ body {
 h1 {font-size: 30px;}
 h2 {font-size: 24px; margin-bottom: 10px;}
 #container {
+  /*
   background: #a7cfdf; 
   background: -moz-linear-gradient(top,  #a7cfdf 0%, #23538a 100%); 
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a7cfdf), color-stop(100%,#23538a)); 
@@ -16,6 +15,11 @@ h2 {font-size: 24px; margin-bottom: 10px;}
   background: -o-linear-gradient(top,  #a7cfdf 0%,#23538a 100%); 
   background: -ms-linear-gradient(top,  #a7cfdf 0%,#23538a 100%); 
   background: linear-gradient(top,  #a7cfdf 0%,#23538a 100%);   
+  */
+  background-repeat: no-repeat;
+  background-image: url(../ui/castanho.svg);
+  width: 100%;
+  height: 100%;
   outline: 0;
 }
 #intro h1 span {
@@ -84,4 +88,13 @@ h2 {font-size: 24px; margin-bottom: 10px;}
   background: -ms-linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%); 
   background: linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%); 
 }
-
+#gamecanvas{
+  position: absolute;
+  z-index: 4;
+}
+#effectgame{
+  position: absolute;
+  z-index: 3;
+  opacity:0.4;
+  filter:alpha(opacity=40); /* For IE8 and earlier */
+}

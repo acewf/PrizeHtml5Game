@@ -1,3 +1,5 @@
+
+var fristscreen = $('.fristscreen');
 (function(){
 
   /* DOM elements */
@@ -5,17 +7,18 @@
       field         = $( '#playfield' ),
       player        = $( '#player' ),
       intro         = $( '#intro' ),
-      instructions  = $( '#instructions' ),
+      //instructions  = $( '#instructions' ),
       leftbutton    = $( '.left' ),
       rightbutton   = $( '.right' ),
       scoredisplay  = $( '#score output' ),
       energydisplay = $( '#energy output' ),
-      canvas        = $( 'canvas' ),
+      canvas        = $( '#gamecanvas' ),
       over          = $( '#gameover' ),
       overmsg       = over.querySelector( '.message' ),
       characters    = document.querySelectorAll( 'li.introdeck' ),
       c             = canvas.getContext( '2d' ),
       startenergy   = +energydisplay.innerHTML;
+
 
   /* Game data */
   var scores = { 
@@ -102,9 +105,9 @@
     if ( gamestate === 'gameover' ) {
       if ( t.id === 'replay' ) { showintro(); }
     }
-    if ( t.className === 'next' ) { instructionsnext(); }
-    if ( t.className === 'endinstructions' ) { instructionsdone(); }
-    if ( t.id === 'instructionbutton' ) { showinstructions(); }
+    //if ( t.className === 'next' ) { instructionsnext(); }
+    //if ( t.className === 'endinstructions' ) { instructionsdone(); }
+    //if ( t.id === 'instructionbutton' ) { showinstructions(); }
     if ( t.id === 'playbutton' ) { startgame(); }
     ev.preventDefault();
   }
@@ -151,11 +154,13 @@
     Introduction
   */ 
   function showintro() {
+    /*
     setcurrent( intro );
     gamestate = 'intro';
     var scoreelms = intro.querySelectorAll( 'output' );
     scoreelms[ 0 ].innerHTML = storedscores.last;
     scoreelms[ 1 ].innerHTML = storedscores.high;
+    */
   }
 
   /* 
@@ -209,6 +214,8 @@
     score = 0;
     energydisplay.innerHTML = startenergy;
     loop();
+    engine.changeCanvasRender();
+    fristscreen.addClass( "fristscreenout" );
   }
 
   /* 

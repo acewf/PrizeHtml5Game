@@ -5,13 +5,13 @@ var insidetxt = $('.insidetxt');
 engine.particules = [];
 var W = 525, H = 525;
 var canvas;
+var intVeral;
+var startAlpha = 80;
 engine.onLoad = function(){
 
 	canvas = document.getElementById("layerCircles");
 	engine.ctx  = canvas.getContext("2d");
-	
 	//Make the canvas occupy the full page
-	
 	canvas.width = W;
 	canvas.height = H;
 	
@@ -19,15 +19,48 @@ engine.onLoad = function(){
 	var mouse = {};
 	
 	//Lets create some particles now
-	var particle_count = 200;
+	var particle_count = 400;
 	for(var i = 0; i < particle_count; i++)
 	{
 		engine.particules.push(new engine.particle());
 	}
 
-	present.addClass( "present presentin");
-	console.log(insidetxt)
+	present.toggleClass( "presentdefault" ).addClass( "present presentin");
 	insidetxt.addClass( "insidetxt inalpha").toggleClass( "outalpha" )//
+	console.log('started')
+	intVeral = setInterval(engine.draw, 50);
+}
+
+engine.clearParticleCreator = function (argument) {
+	clearInterval(intVeral);
+	engine.ctx.clearRect(0, 0, W, H);
+}
+
+
+
+engine.changeCanvasRender = function (argument) {
+	clearInterval(intVeral);
+	engine.ctx.clearRect(0, 0, W, H);
+
+	canvas = document.getElementById("effectgame");
+	console.log(canvas);
+	W = window.innerWidth, H = window.innerHeight;
+	engine.ctx  = canvas.getContext("2d");
+	//Make the canvas occupy the full page
+	canvas.width = W;
+	canvas.height = H;
+	
+	var particles = [];
+	var mouse = {};
+	engine.particules = [];
+	//Lets create some particles now
+	var particle_count = 400;
+	for(var i = 0; i < particle_count; i++)
+	{
+		engine.particules.push(new engine.particle());
+	}
+	console.log('started')
+	intVeral = setInterval(engine.draw, 50);
 }
 
 
@@ -42,9 +75,9 @@ engine.particle = function()
 	//Now the flame follows the mouse coordinates
 	
 
-	this.location = {x: 260+Math.round(-250+Math.random()*500), y: 560+Math.round(-50+Math.random()*100)};
+	this.location = {x: W/2+Math.round(-W/2+Math.random()*W), y: H+Math.round(-50+Math.random()*H/5)};
 	//radius range = 10-30
-	this.radius = 1+Math.random()*60;
+	this.radius = 1+Math.random()*20;
 	//life range = 20-30
 	this.life = 80+Math.random()*500;
 	this.remaining_life = this.life;
@@ -61,7 +94,7 @@ engine.draw = function ()
 		//particles are painted with "lighter"
 		//In the next frame the background is painted normally without blending to the 
 		//previous frame
-		engine.ctx.clearRect(0, 0, canvas.width, canvas.height);
+		engine.ctx.clearRect(0, 0, W, H);
 		engine.ctx.globalCompositeOperation = "source-over";
 		engine.ctx.fillStyle = "rgba(0, 0, 0, 0)";
 		engine.ctx.fillRect(0, 0, W, H);
@@ -73,7 +106,7 @@ engine.draw = function ()
 			engine.ctx.beginPath();
 			//changing opacity according to the life.
 			//opacity goes to 0 at the end of life of a particle
-			p.opacity = Math.round(p.remaining_life/p.life*80)/100
+			p.opacity = Math.round(p.remaining_life/p.life*startAlpha)/100
 			//a gradient instead of white fill
 			var gradient = engine.ctx.createRadialGradient(p.location.x, p.location.y, 0, p.location.x, p.location.y, p.radius);
 			gradient.addColorStop(0.1, "rgba("+p.r+", "+p.g+", "+p.b+", "+p.opacity+")");
@@ -85,7 +118,7 @@ engine.draw = function ()
 			
 			//lets move the particles
 			p.remaining_life--;
-			var remaningRadius = p.radius--; //+Math.round(-2.5+Math.random()*5)
+			var remaningRadius = p.radius-Math.round(-1+Math.random()*2)
 			p.radius=remaningRadius;
 			p.location.x += p.speed.x;
 			p.location.y += p.speed.y;
@@ -100,9 +133,6 @@ engine.draw = function ()
 			}
 		}
 	}
-	
-	setInterval(engine.draw, 50);
-
 window.onload = function(){
 engine.onLoad();
 }

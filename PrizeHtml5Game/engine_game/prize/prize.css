@@ -31,7 +31,7 @@ li {
 }
 #playfield, #gameover, #instructions, #intro {
   position: absolute;
-  top: -900px;
+  top: 100%;
   left: 0;
   width: 100%;
   height: 100%;
@@ -40,6 +40,7 @@ li {
   -ms-transition: top 1s;
   -o-transition: top 1s;
   transition: top 1s;
+
 }
 #playfield.current, 
 #gameover.current, 
@@ -102,7 +103,7 @@ canvas {
 }
 #scoresinfo {
   position: absolute;
-  width: 100%;
+  width: 200px;
   padding: 5px 0;
   background: rgb(76,76,76); /* Old browsers */
   background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%, rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%); /* FF3.6+ */
@@ -131,6 +132,22 @@ canvas {
   color: #fff;
   font-family: "SonaeBold";
   font-size: .9em;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.fristscreenout{
+  top: -100%;
+  transition-property:top;
+  transition-duration: .5s;
+  transition-timing-function: ease-out;
+  /* Safari */
+  -webkit-transition-property:top;
+  -webkit-transition-duration:.5s;
+  -webkit-transition-timing-function:ease-out;
+}
+.fristscreen .fundo{
+  height: 100%;
 }
 .fristscreen .lefttxt{
   left: 20px;
@@ -207,7 +224,7 @@ canvas {
   position: absolute;
   z-index: 20;
   text-align: center;
-  left: 140;
+  left: 140px;
   top: 50px;
   width: 246px;
 }
@@ -237,9 +254,13 @@ canvas {
   margin-top: 10px;
 }
 .maskara .insidetxt .thridtxt{
+  display: inline-block;
+  width: 262px;
+  z-index: 2;
+  position: relative;
   font-size: 1.2em;
   color: #000;
-  margin: 35px;
+  margin-top: 35px;
 }
 .maskara .present{
   position: absolute;
@@ -249,11 +270,15 @@ canvas {
   width: 224px;
   height: 295px;
   left: 50%;
-  
+  text-align: center;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
+}
+
+.presentdefault{
+  top: 680px;
 }
 
 .presentout{
@@ -274,12 +299,12 @@ canvas {
   transition-property:top;
   transition-duration: 1s;
   transition-timing-function: linear;
-  transition-delay: 2s;
+  transition-delay: 1s;
   /* Safari */
   -webkit-transition-property:top;
   -webkit-transition-duration:1s;
   -webkit-transition-timing-function:linear;
-  -webkit-transition-delay:2s;
+  -webkit-transition-delay:1s;
   }
 
 .backMask{
@@ -306,10 +331,17 @@ canvas {
   background-image: url(../ui/prize.png);
 
   z-index: 8;
-  right: 10%;
+  right: 5%;
   top: 15%;
-  transform: translate(-50%, -50%) scale(1.4);
-  -webkit-transform: translate(-50%, -50%) scale(1.4);
-  -moz-transform: translate(-50%, -50%) scale(1.4);
-  -ms-transform: translate(-50%, -50%) scale(1.4);
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.playbt{
+  text-decoration: underline;
+  font-size: 1.3em;
+  margin-top: 115px;
+  cursor: pointer;
 }
