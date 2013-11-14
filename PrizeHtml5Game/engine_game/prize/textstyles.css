@@ -48,7 +48,7 @@ h2 {font-size: 24px; margin-bottom: 10px;}
   font-size: 30px;
   text-transform: uppercase;
 }
-#intro button, #gameover button, #characters button {
+#intro button, #characters button {
   display: block;
   width: 100%;
   font-family: "Patua One", calibri, arial, sans-serif;
@@ -97,4 +97,39 @@ h2 {font-size: 24px; margin-bottom: 10px;}
   z-index: 3;
   opacity:0.4;
   filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+
+.changeOriention{
+  font-size: 2em;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  position: absolute;
+  background-color: #fff;
+  opacity: .8;
+  display: none;
+}
+
+.feedinfo{
+  font-size: 2em;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  position: absolute;
+  background-color: #fff;
+  opacity: .8;
+  display: none;
+}
+
+.center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }

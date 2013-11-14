@@ -1,8 +1,64 @@
-
+var elementLifes = new Array();
 var fristscreen = $('.fristscreen');
+var backgroundGameCanvas = $('#backgroundFallback');
+var life1 = $('#life1');
+var life2 = $('#life2');
+var life3 = $('#life3');
+var defaultValue = {nome:"nome* (primeiro e último)",email:"email*",empresa:"empresa*"}
+var intgame;
+var deviceType;
+var base32 = new Nibbler({
+    dataBits: 8,
+    codeBits: 5,
+    keyString: '0123456789ABCDEFGHJKMNPQRSTVWXYZ',
+    pad: '='
+});
+function senergy() {
+  value = 0;
+  this._energy = base32.encode(value.toString());
+}
+
+senergy.prototype = {
+    get energy() {
+        return base32.decode(this._energy);
+    },
+    get energyencode() {
+        return this._energy;
+    },
+    set energy(value) {
+        this._energy = value;
+    }
+};
+
+var scores  = new senergy();
+elementLifes.push(life3);
+elementLifes.push(life2);
+elementLifes.push(life1);
+life1.fadeTo( "fast", 1 );
+var orientationFunc = function() {
+  // Announce the new orientation number
+  if (window.orientation==0) {
+    $('.changeOriention').css('display','block');
+  } else {
+    $('.changeOriention').css('display','none');
+  }
+}
+window.addEventListener("orientationchange", orientationFunc, false);
+orientationFunc();
+$(".inputfield").focus(function() {
+  this.value = "";
+  console.log(this.id, "Handler for .focus() called." );
+
+  defaultValue[this.id]
+});
+$(".inputfield").focusout(function() {
+  if(this.value =="")
+  this.value = defaultValue[this.id];
+});
 (function(){
 
   /* DOM elements */
+  
   var container     = $( '#container' ),
       field         = $( '#playfield' ),
       player        = $( '#player' ),
@@ -11,19 +67,21 @@ var fristscreen = $('.fristscreen');
       leftbutton    = $( '.left' ),
       rightbutton   = $( '.right' ),
       scoredisplay  = $( '#score output' ),
-      energydisplay = $( '#energy output' ),
       canvas        = $( '#gamecanvas' ),
       over          = $( '#gameover' ),
+      ranking          = $( '#ranking' ),
       overmsg       = over.querySelector( '.message' ),
       characters    = document.querySelectorAll( 'li.introdeck' ),
       c             = canvas.getContext( '2d' ),
-      startenergy   = +energydisplay.innerHTML;
+      startPoints = 0 ,
+      totalLifes = 3,
+      startenergy   = 0;//+energydisplay.innerHTML;
 
-
+      //energydisplay = $( '#energy output' ),
+      //scores.energy = startenergy;
+      scores  = new senergy();
   /* Game data */
-  var scores = { 
-        energy: startenergy 
-      },
+  
       playerincrease = +player.getAttribute( 'data-increase' );
 
   /* counters, etc */
@@ -38,6 +96,12 @@ var fristscreen = $('.fristscreen');
   function init() {
     var current, sprdata, scoreinfo, i, j;
 
+    life1.fadeTo( "fast", 1 );
+    life2.fadeTo( "fast", 1 );
+    life3.fadeTo( "fast", 1 );
+
+    score = 0, gamestate = null, x = 0, sprites = [], allsprites = [],
+    spritecount = 0, now = 0, playerY = 0, offset = 0, levelincrease = 0, i=0 ;
     /* retrieve sprite data from HTML */
     sprdata = document.querySelectorAll( 'img.sprite' );
     i = sprdata.length;
@@ -67,14 +131,24 @@ var fristscreen = $('.fristscreen');
     container.focus();
 
     /* Assign event handlers */
+    
     container.addEventListener( 'keydown', onkeydown, false );
     container.addEventListener( 'keyup', onkeyup, false );
+    
     container.addEventListener( 'touchstart', ontouchstart, false );
     container.addEventListener( 'touchend', ontouchend, false );
     container.addEventListener( 'click', onclick, false );
-    container.addEventListener( 'mousemove', onmousemove, false );
-    window.addEventListener( 'deviceorientation', tilt, false );
 
+    if( navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)  || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)){
+      container.addEventListener( 'touchmove', ontouchMOVE, false );
+      deviceType = 'mobile'
+    } else {
+      container.addEventListener( 'mousemove', onmousemove, false );
+      deviceType = 'desktop'
+    }
+    /*
+    window.addEventListener( 'deviceorientation', tilt, false );
+    */
     /* Get the game score, or preset it when there isn't any  */
     if( localStorage.html5catcher ) {
       storedscores = JSON.parse( localStorage.html5catcher );
@@ -94,7 +168,6 @@ var fristscreen = $('.fristscreen');
     if( 'ondeviceorientation' in window ) {
       $( '#androidbrowsersucks' ).style.display = 'none';
     }
-    
   };
   
   /* Event Handlers */ 
@@ -103,8 +176,19 @@ var fristscreen = $('.fristscreen');
   function onclick( ev ) {
     var t = ev.target;
     if ( gamestate === 'gameover' ) {
-      if ( t.id === 'replay' ) { showintro(); }
+      if ( t.id === 'replay' ) { init();startgame();}
     }
+    console.log('valoree..........',t.className)
+    if ( t.id === 'rankingbt' ) {
+      engine.getRaking();
+      document.body.className = 'ranking';
+      setcurrent( ranking );
+    }
+    if ( t.className === 'go_click' ) {
+      console.log("goto",t.getAttribute('href'))
+      window.open(t.getAttribute('href'),"_blank");
+    }
+    
     //if ( t.className === 'next' ) { instructionsnext(); }
     //if ( t.className === 'endinstructions' ) { instructionsdone(); }
     //if ( t.id === 'instructionbutton' ) { showinstructions(); }
@@ -125,8 +209,15 @@ var fristscreen = $('.fristscreen');
   /* Touch handling */
   function ontouchstart( ev ) {
     if ( gamestate === 'playing' ) { ev.preventDefault(); }
+    //if (gamestate == 'gameover') {alert('touchHERE')};
+    
     if ( ev.target === rightbutton ) { rightdown = true; }
     else if ( ev.target === leftbutton ) { leftdown = true; }
+  }
+  function ontouchMOVE( ev ) {
+    var orig = ev.pageX ;
+    if ( gamestate === 'playing' ) { ev.preventDefault(); }
+    x = orig;
   }
   function ontouchend( ev ) {
     if ( gamestate === 'playing' ) { ev.preventDefault(); }
@@ -195,6 +286,7 @@ var fristscreen = $('.fristscreen');
     Start the game 
   */
   function startgame() {
+    totalLifes = 3;
     setcurrent( field );
     gamestate = 'playing';
     document.body.className = 'playing';
@@ -207,15 +299,25 @@ var fristscreen = $('.fristscreen');
     x = width / 2;
     sprites = [];
     for ( i = 0; i < initsprites; i++ ) {
-      sprites.push( addsprite() );
+      sprites.push( addsprite('sprite'+i) );
     }
-    scores.energy = startenergy;
+    //scores.energy = startenergy;
+    scores  = new senergy()
     levelincrease = 0;
     score = 0;
-    energydisplay.innerHTML = startenergy;
+    //energydisplay.innerHTML = startenergy;
     loop();
     engine.changeCanvasRender();
     fristscreen.addClass( "fristscreenout" );
+    fristscreen.addClass( "fristscreenout" );
+    var browser=get_browser();
+    var browser_version=get_browser_version();
+    if (((browser=='Firefox') ||  (browser=='MSIE') ||  (browser=='Safari'))) {
+      backgroundGameCanvas.addClass("backgroundCanvasGamefallback");
+    }
+    
+
+    intgame = setInterval(loop, 10);
   }
 
   /* 
@@ -232,13 +334,24 @@ var fristscreen = $('.fristscreen');
     }
 
     /* show scores */
-    energydisplay.innerHTML = scores.energy;
-    scoredisplay.innerHTML = ~~(score/10);
+    var valor = scores.energy;
+
+    if(valor<1000){
+      valor = "000"+valor;
+    }
+    if(valor>1000 && valor<10000){
+      valor = "00"+valor;
+    }
+    if(valor>10000 && valor<100000){
+      valor = "0"+valor;
+    }
+    scoredisplay.innerHTML = valor;//~~(score/10);
     score++;
 
     /* with increasing score, add more sprites */
     if ( ~~(score/newsprite) > levelincrease ) {
-      sprites.push( addsprite() );
+      console.log('cria sprite','sprite'+sprites.length)
+      sprites.push( addsprite('sprite'+sprites.length) );
       levelincrease++;
     } 
 
@@ -252,10 +365,11 @@ var fristscreen = $('.fristscreen');
     c.restore();
 
     /* when you still have energy, render next, else game over */
-    scores.energy = Math.min( scores.energy, 100 );
-    if ( scores.energy > 0 ) {
-      requestAnimationFrame( loop );
+    //scores.energy = Math.min( scores.energy, 100 );
+    if ( totalLifes > 0 ) {
+      //requestAnimationFrame( loop );
     } else {
+      clearInterval(intgame);
       gameover();
     }
   };
@@ -279,12 +393,11 @@ var fristscreen = $('.fristscreen');
     document.body.className = 'gameover';
     setcurrent( over );
     gamestate = 'gameover';
-    var nowscore =  ~~(score/10);
-    over.querySelector( 'output' ).innerHTML = nowscore;
-    storedscores.last = nowscore;
-    if ( nowscore > storedscores.high ) {
-      overmsg.innerHTML = overmsg.getAttribute('data-highscore');
-      storedscores.high = nowscore;
+    over.querySelector( 'output' ).innerHTML = scores.energy;
+    storedscores.last = scores.energy;
+    if ( scores.energy > storedscores.high ) {
+      //overmsg.innerHTML = overmsg.getAttribute('data-highscore');
+      storedscores.high = scores.energy;
     }
     localStorage.html5catcher = JSON.stringify(storedscores);
   }
@@ -312,19 +425,19 @@ var fristscreen = $('.fristscreen');
           this.py = -200;
           i = this.effects.length;
           while ( i-- ) {
-            scores[ this.effects[ i ].effect ] += +this.effects[ i ].value;
+            var getVla = parseInt(scores[ this.effects[ i ].effect ])+parseInt(this.effects[ i ].value);
+            scores.energy = base32.encode(getVla.toString());
           }
+          setspritedata( this );
+          
         }
       } 
       if ( this.px > (width - this.offset) || this.px < this.offset ) {
         this.vx = -this.vx;
       }
-      if ( this.py > height + 100 ) {
+      if ( this.py > height) {
         if ( this.type === 'good' ) {
-          i = this.effects.length;
-          while ( i-- ) {
-            scores[ this.effects[ i ].effect ] -= +this.effects[ i ].value;
-          }
+          removeElementFromView();
         }
         setspritedata( this );
       }
@@ -334,28 +447,45 @@ var fristscreen = $('.fristscreen');
       c.translate( this.px, this.py );
       c.translate( this.width * -0.5, this.height * -0.5 );
       c.drawImage( this.img, 0, 0) ;
+      this.last = this.img;
       c.restore();
     };
   };
 
-  function addsprite() {
+  function removeElementFromView(){
+    totalLifes--;
+    var elem = elementLifes[totalLifes];
+    elem.fadeTo( "fast", 0 );
+  }
+
+  function addsprite(name) {
     var s = new sprite(); 
+    s.name = name;
     setspritedata( s );
     return s;
   };
-  
+  var timesCallSpecial = 0;
+  var limitCall = 8;
   function setspritedata( sprite ) {
     var r = ~~rand( 0, spritecount );
+    if (timesCallSpecial>limitCall) {
+      r = 3;
+      timesCallSpecial = 0;
+    };
+    timesCallSpecial++;
     sprite.img = allsprites[ r ].img;
     sprite.height = sprite.img.offsetHeight;
     sprite.width = sprite.img.offsetWidth;
     sprite.type = allsprites[ r ].type;
     sprite.effects = allsprites[ r ].effects;
+
     sprite.offset = allsprites[ r ].offset;
-    sprite.py = -100;
+    sprite.py = -sprite.height;
     sprite.px = rand( sprite.width / 2, width - sprite.width / 2  );
-    sprite.vx = rand( -1, 2 );
-    sprite.vy = rand( 1, 5 );
+    var tempvalue = Math.round(levelincrease/4);
+    sprite.vx = rand( -(2+tempvalue), 4+tempvalue );
+    sprite.vy = (levelincrease/2)+rand( 3, 5 );
+    
   };
 
   /* yeah, yeah... */
@@ -375,7 +505,7 @@ var fristscreen = $('.fristscreen');
     old = elm;
   };
 
-  /* Detect and set requestAnimationFrame */
+  /* Detect and set requestAnimationFrame 
   if ( !window.requestAnimationFrame ) {
     window.requestAnimationFrame = (function() {
       return window.webkitRequestAnimationFrame ||
@@ -387,7 +517,7 @@ var fristscreen = $('.fristscreen');
       };
     })();
   }
-
+  */
   /* off to the races */
   init();
 })();

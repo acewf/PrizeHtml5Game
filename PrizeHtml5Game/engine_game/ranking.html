@@ -1,0 +1,78 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./prize/prize.css" type="text/css">
+	<link rel="stylesheet" href="./fonts/sonae-bold.css" type="text/css">
+</head>
+<body>
+	<div class="ranking">
+		<div class="offerprize"></div>
+		<!--
+		<svg xmlns="http://www.w3.org/2000/svg" style="" xmlns:xlink="http://www.w3.org/1999/xlink" width="568" height="426">
+			<image mask="url(#masking2)" xlink:href="http://www.html5rocks.com/en/tutorials/masking/adobe/humayun-thom-arno.jpg" width="500" height="350"></image>
+		</svg>
+	-->
+		<div class="maskara">
+			<div class="insidetxt outalpha">
+				<div class="fristtxt"><b>RANKING</b></div>
+				<div class="secondtxt">
+					<ul class="listaresultados">
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+						<li><div class="name">PEDRO FILIPE SOUSA MARTINS</div><div class="pontos">XXXX</div></li>
+					</ul>
+
+				</div>
+				<div class="fourtxt">Pode melhorar a sua pontuação até às XXh do dia XX de xxxxxx de 2013 para ganhar um Cheque Prenda Prize até 250€.</div>
+			</div>
+			<div class="present presentdefault"><div id="playbutton" class="playbt">JOGAR OUTRA VEZ</div></div>
+			<canvas id="layerCircles"></canvas>
+			<div class="backgroundCanvas"></div>
+		</div>
+		<div class="backMask"></div>
+		<div class="fundo">
+			<!-- <img src="ui/roxo.svg" class="svgelement"> -->
+			<svg class="svgelement">
+			  <image xlink:href="ui/roxo.svg" src="roxo.png" width="100%" height="100%" />
+			</svg>
+
+		</div>
+	</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script type="text/javascript">
+function Name(first, last) {
+    this.first = first;
+    this.last = last;
+}
+
+Name.prototype = {
+    get fullName() {
+        return this.first + " " + this.last;
+    },
+
+    set fullName(name) {
+        var names = name.split(" ");
+        this.first = names[0];
+        this.last = names[1];
+    },
+    set firstName(name) {
+        this.first = name;
+    }
+};
+var nas = new Name("PEDRO","MARTINS");
+nas.firstName = "JOAO";
+
+console.log(nas.fullName)
+console.log(nas)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./prize/prize.css" type="text/css">
+	<link rel="stylesheet" href="./fonts/sonae-bold.css" type="text/css">
+</head>
+<body>
+	<div>
+		<!--
+		<svg>
+		  <defs>
+		    <linearGradient id="gradient" x1="0" y1="00%" x2 ="0" y2="100%">
+		      <stop stop-color="black" offset="0"/>
+		      <stop stop-color="white" offset="1"/>
+		    </linearGradient>
+
+		    <mask id="masking" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+		      <rect y="0.3" width="1" height=".7" fill="url(#gradient)" />
+		      <circle cx=".5" cy=".5" r=".35" fill="white" />
+		    </mask>
+		  </defs>
+		</svg>
+	-->
+		<img src="ui/fundo_inside.jpg" width="700px" height="525px">
+	</div>
+	<div class="fristscreen">
+		<div class="lefttxt">
+			<div class="descript">Para se habilitar ser-lhe-á solicitado um nickname para figurar no ranking e um e-mail de contacto (não visível).</div>
+			<div class="link"><a href="http://www.chequeprendaprize.com">www.chequeprendaprize.com</a></div>
+		</div>
+		<div class="righttxt">
+			<div class="descript">Os jogadores com as 3 melhores pontuações até às XXh do dia XX de xxxxxx de 2013 ganham Cheques Prenda Prize no valor de 150€, 200€ e 250€.</div>
+			<div class="link">www.chequeprendaprize.com</div>
+		</div>
+		<div class="logoprize"></div>
+		<div class="maskara">
+			<div class="insidetxt outalpha">
+				<div class="fristtxt"><b>JOGUE E GANHE</b></div>
+				<div class="secondtxt">Cheques Prenda Prize</div>
+				<div class="thridtxt"><b>APANHE O MAIOR NÚMERO DE PRIZES QUE CONSEGUIR.</b></div>
+			</div>
+			<div class="present presentdefault"><div id="playbutton" class="playbt">JOGAR</div></div>
+			<canvas id="layerCircles"></canvas>
+			<div class="backgroundCanvas"></div>
+		</div>
+		<div class="backMask"></div>
+		<div class="fundo">
+			<!-- <img src="ui/roxo.svg" class="svgelement"> -->
+			<svg class="svgelement">
+			  <image xlink:href="ui/roxo.svg" src="roxo.png" width="100%" height="100%" />
+			</svg>
+
+		</div>
+	</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="./prize/main.js"></script>
+</body>
+</html>

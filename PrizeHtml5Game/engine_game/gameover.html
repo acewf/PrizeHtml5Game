@@ -1,0 +1,40 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./prize/prize.css" type="text/css">
+	<link rel="stylesheet" href="./fonts/sonae-bold.css" type="text/css">
+</head>
+<body>
+	<div class="gameOver">
+		<div class="offerprize"></div>
+		<div class="maskara">
+			<div class="insidetxt outalpha">
+				<div class="fristtxt"><b>GAME OVER</b></div>
+				<div class="secondtxt">PONTUAÇÃO</div>
+				<div class="thridtxt"><b><output></output></b></div>
+				<div class="fourtxt">Registe a sua pontuação e habilite-se a ganhar até 250€ em <h3>Cheques Prenda Prize</h3></div>
+				<input type="text" class="nome" value="nome* (primeiro e último)">
+				<input type="text" class="email" value="email">
+				<input type="text" class="empresa" value="empresa">
+				<div class="fivetxt">* Preenchimento obrigatório.</div>
+				<button class="oksend" id="send">OK</button>
+				<button class="sixtxt">VER RANKING</button>
+				<button class="seventxt" id="replay">JOGAR OUTRA VEZ</button>
+			</div>
+			<canvas id="layerCircles"></canvas>
+			<div class="backgroundCanvas"></div>
+		</div>
+		<div class="backMask"></div>
+		<div class="fundo">
+			<!-- <img src="ui/roxo.svg" class="svgelement"> -->
+			<svg class="svgelement">
+			  <image xlink:href="ui/roxo.svg" src="roxo.png" width="100%" height="100%" />
+			</svg>
+
+		</div>
+	</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="./prize/main.js"></script>
+</body>
+</html>

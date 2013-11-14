@@ -1,5 +1,6 @@
 var engine = new Object();
 var layerCircles = $('#layerCircles');
+var backgroundCanvas = $('.backgroundCanvas');
 var present = $('.present');
 var insidetxt = $('.insidetxt');
 engine.particules = [];
@@ -7,8 +8,22 @@ var W = 525, H = 525;
 var canvas;
 var intVeral;
 var startAlpha = 80;
+function get_browser(){
+    var N=navigator.appName, ua=navigator.userAgent, tem;
+    var M=ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+    M=M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+    return M[0];
+    }
+function get_browser_version(){
+	var N=navigator.appName, ua=navigator.userAgent, tem;
+	var M=ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+	if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+	M=M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+	return M[1];
+}
 engine.onLoad = function(){
-
+	
 	canvas = document.getElementById("layerCircles");
 	engine.ctx  = canvas.getContext("2d");
 	//Make the canvas occupy the full page
@@ -24,43 +39,102 @@ engine.onLoad = function(){
 	{
 		engine.particules.push(new engine.particle());
 	}
-
+	var browser=get_browser();
+	var browser_version=get_browser_version();
+	console.log(browser,browser_version)
+	if (!((browser=='Firefox') ||  (browser=='MSIE'))) {
+		if(deviceType=='desktop'){
+			intVeral = setInterval(engine.draw, 50);
+		}
+	} else {
+		backgroundCanvas.addClass( "backgroundCanvasfallback");
+	}
+	//console.log(browser_version);
 	present.toggleClass( "presentdefault" ).addClass( "present presentin");
 	insidetxt.addClass( "insidetxt inalpha").toggleClass( "outalpha" )//
-	console.log('started')
-	intVeral = setInterval(engine.draw, 50);
 }
 
 engine.clearParticleCreator = function (argument) {
 	clearInterval(intVeral);
 	engine.ctx.clearRect(0, 0, W, H);
 }
+engine.successHandle = function(data){
+	$('.feedinfo').css('display','block');
+	$('#feedback').html(data);
+	setTimeout(engine.outSucess, 1500);
+}
+engine.outSucess = function(data){
+	$('.feedinfo').css('display','none');
+}
+engine.errorHandle = function(){
+	$('.feedinfo').css('display','block');
+	$('#feedback').html("ERRO A CONECTAR SERVIDOR");
+	setTimeout(engine.outSucess, 1500);
+	console.log('error');
+}
 
+engine.processForm = function(){
+	console.log("engine.processForm")
+		
+
+	console.log('[scores.energy]',scores.energy,scores.energy.toString());
+	var returnEncode = base32.encode(scores.energy.toString());
+	console.log('returnEncode',returnEncode);
+	console.log(scores.energyencode,'returnEncode',base32.decode(returnEncode)  );
+	
+	var sendValues = $("#my_form").serialize()+ "&pontos="+scores.energyencode;
+	 $.ajax({
+         type: "POST",
+         crossDomain: true,
+         url: "http://prize.pixelkiller.net/prize/queryengine.php",
+         data: sendValues,
+         success:engine.successHandle,
+         error: engine.errorHandle
+      });
+}
+engine.successHandleRanking = function(data){
+	$('.listaresultados').html(data);
+	console.log("sucess",data)
+}
+engine.getRaking = function(){
+	console.log("engine.getRaking")
+	$.ajax({
+         type: "GET",
+         crossDomain: true,
+         url: "http://prize.pixelkiller.net/prize/queryrankin.php",
+         success:engine.successHandleRanking,
+         error: engine.errorHandle
+      });
+}
 
 
 engine.changeCanvasRender = function (argument) {
 	clearInterval(intVeral);
 	engine.ctx.clearRect(0, 0, W, H);
 
-	canvas = document.getElementById("effectgame");
-	console.log(canvas);
-	W = window.innerWidth, H = window.innerHeight;
-	engine.ctx  = canvas.getContext("2d");
-	//Make the canvas occupy the full page
-	canvas.width = W;
-	canvas.height = H;
-	
-	var particles = [];
-	var mouse = {};
-	engine.particules = [];
-	//Lets create some particles now
-	var particle_count = 400;
-	for(var i = 0; i < particle_count; i++)
-	{
-		engine.particules.push(new engine.particle());
+	var browser=get_browser();
+	var browser_version=get_browser_version();
+	if (!((browser=='Firefox') ||  (browser=='MSIE') ||  (browser=='Safari'))) {
+		if(deviceType=='desktop'){
+			canvas = document.getElementById("effectgame");
+			W = window.innerWidth, H = window.innerHeight;
+			engine.ctx  = canvas.getContext("2d");
+			//Make the canvas occupy the full page
+			canvas.width = W;
+			canvas.height = H;
+			
+			var particles = [];
+			var mouse = {};
+			engine.particules = [];
+			//Lets create some particles now
+			var particle_count = 400;
+			for(var i = 0; i < particle_count; i++)
+			{
+				engine.particules.push(new engine.particle());
+			}
+			intVeral = setInterval(engine.draw, 10);
+		}
 	}
-	console.log('started')
-	intVeral = setInterval(engine.draw, 50);
 }
 
 
@@ -133,6 +207,9 @@ engine.draw = function ()
 			}
 		}
 	}
+
+
 window.onload = function(){
-engine.onLoad();
+	console.log('onLoad')
+	engine.onLoad();
 }

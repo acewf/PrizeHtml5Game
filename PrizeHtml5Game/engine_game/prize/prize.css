@@ -20,7 +20,7 @@ li {
 }
 
 .playing #container { 
-  cursor: none;
+  /*cursor: none;*/
 }
 
 @media screen and (min-device-width: 700px) {
@@ -29,7 +29,7 @@ li {
     margin: 0 auto;
   }
 }
-#playfield, #gameover, #instructions, #intro {
+#playfield, #gameover,#ranking, #instructions, #intro {
   position: absolute;
   top: 100%;
   left: 0;
@@ -44,6 +44,7 @@ li {
 }
 #playfield.current, 
 #gameover.current, 
+#ranking.current, 
 #instructions.current, 
 #intro.current {
   top: 0;
@@ -102,25 +103,22 @@ canvas {
   height: 100%;
 }
 #scoresinfo {
+  z-index: 10;
   position: absolute;
-  width: 200px;
-  padding: 5px 0;
-  background: rgb(76,76,76); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%, rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(76,76,76,1)), color-stop(12%,rgba(89,89,89,1)), color-stop(25%,rgba(102,102,102,1)), color-stop(39%,rgba(71,71,71,1)), color-stop(50%,rgba(44,44,44,1)), color-stop(51%,rgba(0,0,0,1)), color-stop(60%,rgba(17,17,17,1)), color-stop(76%,rgba(43,43,43,1)), color-stop(91%,rgba(28,28,28,1)), color-stop(100%,rgba(19,19,19,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* IE10+ */
-  background: linear-gradient(top, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%);
+  background-color: #76298E;
+  left: 20px;
+  top: 20px;
+  width: 120px;
 }
 #energy, #score {
   position: relative;
   color: #fff;
-  padding-left: 20px;
+  font-family: Arial;
+  font-size: 1.8em;
+  text-align: center;
 }
 #energy output, #score output {
-  position: absolute;
-  right: 20px;
+  
 }
 
 .svgelement {
@@ -146,7 +144,7 @@ canvas {
   -webkit-transition-duration:.5s;
   -webkit-transition-timing-function:ease-out;
 }
-.fristscreen .fundo{
+ .fundo{
   height: 100%;
 }
 .fristscreen .lefttxt{
@@ -172,10 +170,20 @@ canvas {
   color: inherit;
   text-decoration: none;
 }
-.fristscreen .righttxt .link{
+.fristscreen .righttxt .linksonea{
   margin-top: 30px;
+  width: 148px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-image: url(../ui/soneasierra.png);
 }
 .maskara{
+  background: -moz-linear-gradient(center top , rgb(46, 46, 46), rgb(0, 0, 0)) repeat scroll 0% 0% transparent;
+  mask: url("../ui/maskdemo.svg#mask-demo");
+  -webkit-mask: url(../ui/maskfund.svg);
+  -o-mask: url("../ui/maskdemo.svg#mask-demo");
+  -ms-mask: url("../ui/maskdemo.svg#mask-demo");
+
   -webkit-mask-size: 526px 526px;
   -webkit-mask: url(../ui/maskfund.svg);
   -webkit-mask-repeat:no-repeat;
@@ -191,10 +199,26 @@ canvas {
   -ms-transform: translate(-50%, -50%);
 
   overflow:hidden;
-
-  
 }
 
+.gameOver{
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  font-family: "SonaeBold";
+  font-size: .9em;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.ranking{
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  font-family: "SonaeBold";
+  font-size: .9em;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
 .littleCircle{
   background: #fff;
   width: 20px;
@@ -206,7 +230,101 @@ canvas {
   left: 50%;
 }
 
-.backgroundCanvas{
+#layerCircles{
+  z-index: 2;
+  position: absolute;
+}
+.fristscreen .maskara .insidetxt{
+  position: absolute;
+  z-index: 20;
+  text-align: center;
+  left: 50px;
+  top: 70px;
+  width: 415px;
+}
+.fristscreen .backgroundCanvas{
+  width: 526px;
+  height: 526px;
+  z-index: 1;
+  position: absolute;
+
+  background-repeat: no-repeat;
+  background-image: url(../ui/fundo_inside.jpg);
+}
+.fristscreen .backgroundCanvasfallback{
+  width: 526px;
+  height: 526px;
+  background-color: #000;
+  z-index: 1;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-image: url(../ui/ballseffect.png);
+}
+
+.backgroundCanvasHidden{
+  display: none;
+}
+.backgroundCanvasGamefallback{
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  display: block;
+  overflow: hidden;
+}
+.backgroundCanvasGamefallback img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+
+@media only screen and (min-device-width : 768px)  and (max-device-width : 1024px)  { 
+  .fristscreen .backgroundCanvas{
+    width: 526px;
+    height: 526px;
+    background-color: #000;
+    z-index: 1;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-image: url(../ui/ballseffect.png);
+  }
+  .ranking .backgroundCanvas{
+    width: 526px;
+    height: 526px;
+    background-color: #000;
+    z-index: 1;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-image: url(../ui/ballseffect.png);
+  }
+  #playfield .backgroundCanvasGamefallback{
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+  }
+}
+.ranking .maskara .insidetxt{
+  position: absolute;
+  z-index: 20;
+  text-align: center;
+   left: 50%;
+  top: 50%;
+  width: 500px;
+
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.ranking .backgroundCanvas{
   width: 526px;
   height: 526px;
   background-color: #f00;
@@ -216,17 +334,80 @@ canvas {
   background-repeat: no-repeat;
   background-image: url(../ui/fundo_inside.jpg);
 }
-#layerCircles{
+.ranking .backgroundCanvasfallback{
+  width: 526px;
+  height: 526px;
+  background-color: #000;
+  z-index: 1;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-image: url(../ui/ballseffect.png);
+}
+.ranking .maskara .insidetxt .fristtxt{
+  font-size: 3em;
+}
+.ranking .maskara .insidetxt .secondtxt{
+  font-size: 1.3em;
+  color: #fff;
+  margin-top: 20px;
+  width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.ranking .maskara .insidetxt .secondtxt ul li{
+  display: inline-block;
+}
+.ranking .maskara .insidetxt .secondtxt ul li div{
+  display: inline-block;
+  overflow: hidden;
+  height: 16px;
+  width: 120px;
+}
+.ranking .maskara .insidetxt .secondtxt ul li div.pontos{
+  text-align: right;
+  display: inline-block;
+  overflow: hidden;
+  height: 16px;
+  width: 40px;
+  margin-right: 20px;
+}
+
+.ranking .maskara .insidetxt .thridtxt{
+  display: inline-block;
+  width: 262px;
   z-index: 2;
+  position: relative;
+  font-size: 1.2em;
+  color: #000;
+  margin-top: 35px;
+}
+.ranking .maskara .insidetxt .fourtxt{
+  font-size: 1.3em;
+  color: #000;
+  margin-top: 10px;
+  margin-top: 50px;
+  margin-bottom: 80px;
+}
+.gameOver .backgroundCanvas{
+  width: 526px;
+  height: 526px;
+  background-color: #76298E;
+  z-index: 1;
   position: absolute;
 }
-.maskara .insidetxt{
+.gameOver .maskara .insidetxt{
   position: absolute;
   z-index: 20;
   text-align: center;
-  left: 140px;
-  top: 50px;
-  width: 246px;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 .inalpha{
   opacity: 100;
@@ -236,7 +417,7 @@ canvas {
   -o-transition: opacity 1s ease-in-out;
   transition: opacity 1s ease-in-out;
 }
-.outalpha{
+.fristscreen .outalpha{
   opacity: 0;
   -webkit-transition: opacity 1s ease-in-out;
   -moz-transition: opacity 1s ease-in-out;
@@ -245,22 +426,34 @@ canvas {
   transition: opacity 1s ease-in-out;
 
 }
-.maskara .insidetxt .fristtxt{
+
+.fristscreen .maskara .insidetxt .fristtxt{
   font-size: 3em;
 }
-.maskara .insidetxt .secondtxt{
-  font-size: 1.8em;
+.fristscreen .maskara .insidetxt .fristtxt div{
+  font-size: 1.2em;
+}
+.fristscreen .maskara .insidetxt .secondtxt{
+  font-size: 2.3em;
   color: #000;
   margin-top: 10px;
 }
-.maskara .insidetxt .thridtxt{
+
+.fristscreen .maskara .insidetxt .thridtxt{
   display: inline-block;
   width: 262px;
   z-index: 2;
   position: relative;
-  font-size: 1.2em;
+  font-size: 1em;
   color: #000;
-  margin-top: 35px;
+  margin-top: 10px;
+  width: 420px;
+}
+.fristscreen .maskara .insidetxt .regulamento{
+  display: inline-block;
+  font-size: 1em;
+  color: #000;
+  margin-top: 20px;
 }
 .maskara .present{
   position: absolute;
@@ -338,10 +531,82 @@ canvas {
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
+.offerprize{
+  position: absolute;
+  width: 155px;
+  height: 155px;
+  background-repeat: no-repeat;
+  background-image: url(../ui/tip_offer.png);
+
+  z-index: 8;
+  right: 5%;
+  top: 15%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
 
 .playbt{
   text-decoration: underline;
   font-size: 1.3em;
   margin-top: 115px;
   cursor: pointer;
+}
+
+.lifes {
+  position: absolute;
+  z-index: 7;
+  bottom: 10px;
+  right: 40px;
+}
+/* GAME OVER CSS */
+.gameOver button{
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  margin-top: 15px;
+  color: #fff;
+  font-family: "SonaeBold";
+  font-size: 1.6em;
+  background-color: Transparent;
+  border: none;
+}
+.gameOver .fivetxt{
+  text-align: left;
+  font-size: .8em;
+}
+.gameOver .maskara .insidetxt .fourtxt{
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-top: 20px;
+}
+.gameOver h3{
+  display: inline-block;
+}
+.gameOver .oksend button{
+  width: 32px;
+  position: absolute;
+  display: inline-block;
+  color: #fff;
+  font-family: "SonaeBold";
+  font-size: 1.6em;
+  background-color: Transparent;
+  border: none;
+}
+.gameOver input{
+  width: 100%;
+  margin-top: 5px;
+  color: #76298E;
+}
+.gameOver .maskara .insidetxt .fristtxt{
+  font-size: 3em;
+}
+.gameOver .maskara .insidetxt .secondtxt{
+  font-size: 1.8em;
+  margin-top: 10px;
+}
+.gameOver .maskara .insidetxt .thridtxt{
+  display: inline-block;
+  font-size: 3em;
 }

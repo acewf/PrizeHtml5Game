@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
   <meta charset="UTF-8">
   <title>Prize</title>
   <meta type="description" content="Prize sonae sierra">
@@ -17,22 +18,26 @@
 
   <!--  <img src="img/background/laranja.svg" class="svgelement">-->
 
+  <div class="changeOriention"><div class="center">Mude Orientação do seu dispositivo</div></div>
+  <div class="feedinfo"><div class="center" id="feedback">VALORE</div></div>
+
   <section id="intro" class="current">
       <div class="fristscreen">
         <div class="lefttxt">
-          <div class="descript">Para se habilitar ser-lhe-á solicitado um nickname para figurar no ranking e um e-mail de contacto (não visível).</div>
-          <div class="link"><a href="http://www.chequeprendaprize.com">www.chequeprendaprize.com</a></div>
+          <div class="descript">Para se habilitar ser-lhe-á solicitado o seu nome para figurar no ranking e também o nome da sua empresa um<br> e-mail de contacto (ambos não visíveis)</div>
+          <div class="link"><a id="goClick" class="go_click" href="http://www.chequeprendaprize.com">www.chequeprendaprize.com</a></div>
         </div>
         <div class="righttxt">
-          <div class="descript">Os jogadores com as 3 melhores pontuações até às XXh do dia XX de xxxxxx de 2013 ganham Cheques Prenda Prize no valor de 150€, 200€ e 250€.</div>
-          <div class="link">www.chequeprendaprize.com</div>
+          <div class="descript">Os jogadores com as 3 melhores pontuações até ao dia 15 de dezembro de 2013 ganham Cheques Prenda Prize no valor de 150€, 200€ e 250€</div>
+          <a id="goClickto" class="go_click" href="http://www.sonaesierra.com"><div class="linksonea"></div></a>
         </div>
         <div class="logoprize"></div>
-        <div class="maskara">
+         <div class="maskara">
           <div class="insidetxt outalpha">
-            <div class="fristtxt"><b>JOGUE E GANHE</b></div>
+            <div class="fristtxt"><b>JOGUE E <div class="ganhe">GANHE</div></b></div>
             <div class="secondtxt">Cheques Prenda Prize</div>
-            <div class="thridtxt"><b>APANHE O MAIOR NÚMERO DE PRIZES QUE CONSEGUIR.</b></div>
+            <div class="thridtxt"><b>Apanhe o maior número de Prizes que conseguir, registe o seu resultado no fim de cada jogo e habilite-se a ganhar Cheques Prenda Prize. Mas atenção, se deixar escapar algum dos que têm marca, perde uma vida.</b></div>
+            <div class="regulamento"><b><a class="go_click" id="goClickRegulamento" href="http://www.sonaesierra.com">Regulamento</a></b></div>
           </div>
           <div class="present presentdefault"><div id="playbutton" class="playbt">JOGAR</div></div>
           <canvas id="layerCircles"></canvas>
@@ -51,62 +56,95 @@
   <section id="instructions">
     <ul id="characters" data-countstart="2" data-newsprite="500">
       <li class="introdeck">
-        <h2>You are HTML5:</h2>
         <img src="./ui/boxprizegame.png" width="165" height="220" id="player" data-increase="5">
-        <p><button class="next">More</button></p>
+        <ul>
+          
+          <li><img src="./ui/prizegame.png" class="sprite" alt="Video" data-collision="energy:100" data-type="good"></li>
+          <li><img src="./ui/cloud_effect.png" class="sprite" alt="jQuery" data-collision="energy:1" data-type="bad"></li>
+          <li><img src="./ui/bejeform.png" class="sprite" alt="Media queries" data-collision="energy:3" data-type="bad"></li>
+          <li><img src="./ui/greenform.png" class="sprite" alt="Drag and Drop" data-collision="energy:5" data-type="bad"></li>
+        </ul>
       </li>
-
-      <li class="introdeck">
-        <ul>
-          <li><img src="./ui/prizegame.png" class="sprite" alt="Video" data-collision="energy:20" data-type="good"></li>
-        </ul>
-        <ul>
-          <li><img src="./ui/greenform.png" class="sprite" alt="Semantic Markup" data-collision="energy:10" data-type="good"></li>
-          <li><img src="./ui/cloud_effect.png" class="sprite" alt="History" data-collision="energy:10" data-type="good"></li>
-        </ul>
-        <p><button class="next">More</button></p>
-      </li>
-
-      <li class="introdeck">
-        <ul>
-          <li><img src="./ui/greenform.png" class="sprite" alt="Drag and Drop" data-collision="energy:5" data-type="good"></li>
-          <li><img src="./ui/cloud_effect.png" class="sprite" alt="Menus" data-collision="energy:5" data-type="good"></li>
-        </ul>
-        <ul>
-          <li><img src="./ui/greenform.png" class="sprite" alt="Flash" data-collision="energy:-20" data-type="bad"></li>
-          <li><img src="./ui/cloud_effect.png" class="sprite" alt="jQuery" data-collision="energy:-20" data-type="bad"></li>
-        </ul>
-        <p><button class="next">More</button></p>
-      </li>
-
-      <li class="introdeck">
-        <ul>
-          <li><img src="./ui/bejeform.png" class="sprite" alt="Media queries" data-collision="energy:-10" data-type="bad"></li>
-          <li><img src="./ui/prizegame.png" class="sprite" alt="File API" data-collision="energy:-10" data-type="bad"></li>
-        </ul>
-        <p><button class="endinstructions">Back to menu</button></p>
-      </li>
-
     </ul>
   </section>
 
   <section id="playfield">
     <div id="scoresinfo">
-    <div id="energy">Energy <output>100</output></div>
-    <div id="score">Score <output></output></div>
+    <div id="score"><output>100</output></div>
+    </div>
+     <div class="lifes">
+      <img src="./ui/life.png" class="life" id="life1">
+      <img src="./ui/life.png" class="life" id="life2">
+      <img src="./ui/life.png" class="life" id="life3">
     </div>
     <canvas id="effectgame"></canvas>
     <canvas id="gamecanvas"></canvas>
-
+    <div id="backgroundFallback" class="backgroundCanvasHidden">
+      <img src="ui/ballseffect.png" width="100%" height="auto">
+    </div>
   </section>
 
   <section id="gameover">
-    <header><h1>Game over!</h1></header>
-    <p>Your score: <output></output></p>
-    <p class="message" data-highscore="New highscore!"></p>
-    <p><button id="replay">Play again</button></p>
+    <div class="gameOver">
+      <div class="offerprize"></div>
+      <div class="maskara">
+        <div class="insidetxt outalpha">
+          <div class="fristtxt"><b>GAME OVER</b></div>
+          <div class="secondtxt">PONTUAÇÃO</div>
+          <div class="thridtxt"><b><output></output></b></div>
+          <div class="fourtxt">Registe a sua pontuação e habilite-se a ganhar até 250€ em <h3>Cheques Prenda Prize</h3></div>
+          <form id="my_form">
+            <input type="text" class="inputfield" name="nome" id="nome" value="nome* (primeiro e último)">
+            <input type="text" class="inputfield" name="email" id="email" value="email*">
+            <input type="text" class="inputfield" name="empresa" id="empresa" value="empresa*">
+            <div class="fivetxt">* Preenchimento obrigatório.</div>
+            <button class="oksend" onclick="engine.processForm()" id="send">OK</button>
+          </form>
+          <button class="sixtxt" id="rankingbt">VER RANKING</button>
+          <button class="seventxt" id="replay">JOGAR OUTRA VEZ</button>
+        </div>
+        <canvas id="layerCircles"></canvas>
+        <div class="backgroundCanvas"></div>
+      </div>
+      <div class="backMask"></div>
+      
+      <div class="fundo">
+        <svg class="svgelement">
+          <!--<image xlink:href="ui/testsize.svg" src="testsize.png" width="100%" height="100%" />-->
+          <image xlink:href="ui/roxo.svg" src="roxo.png" width="100%" height="100%" />
+        </svg>
+
+      </div>
+    </div>
   </section>
 
+  <section id="ranking">
+    <div class="ranking">
+    <div class="offerprize"></div>
+    <div class="maskara">
+      <div class="insidetxt outalpha">
+        <div class="fristtxt"><b>RANKING</b></div>
+        <div class="secondtxt">
+          <ul class="listaresultados">
+          </ul>
+
+        </div>
+        <div class="fourtxt">Os jogadores com as 3 melhores pontuações até ao dia 15 de dezembro de 2013 ganham Cheques Prenda Prize no valor de 150€, 200€ e 250€.</div>
+      </div>
+      <div class="present presentdefault"><div id="replay" class="playbt">JOGAR OUTRA VEZ</div></div>
+      <canvas id="layerCircles"></canvas>
+      <div class="backgroundCanvas"></div>
+    </div>
+    <div class="backMask"></div>
+    <div class="fundo">
+      <!-- <img src="ui/roxo.svg" class="svgelement"> -->
+      <svg class="svgelement">
+        <image xlink:href="ui/roxo.svg" src="roxo.png" width="100%" height="100%" />
+      </svg>
+
+    </div>
+  </div>
+  </section>
   <ul id="androidbrowsersucks" style="display: none;">
     <li><button class="left">&nbsp;</button></li>
     <li><button class="right">&nbsp;</button></li>
@@ -116,7 +154,17 @@
 </footer>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="./prize/game.js"></script>
+<script src="./prize/nibbler.js"></script>
 <script src="./prize/main.js"></script>
+<script src="./prize/game.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-45154910-1', 'passatemponatalprize.com');
+  ga('send', 'pageview');
+
+</script>
 </body></html>
